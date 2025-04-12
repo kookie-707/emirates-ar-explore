@@ -574,15 +574,13 @@
             width: 24px;
             height: 24px;
             margin-right: 8px;
-            background-image: url('/api/placeholder/24/24');
+            background-image: url('sunny.png');
             background-size: contain;
         }
         
         /* Enhanced map styling */
         .map-highlight {
             position: absolute;
-            border: 3px solid transparent;
-            border-radius: 50%;
             pointer-events: none;
             opacity: 0;
             transform: scale(0);
@@ -1005,13 +1003,6 @@
                 pin.setAttribute("data-id", location.id);
                 pin.style.animationDelay = `${index * 0.1}s`;
                 
-                // Add pulse effect if sustainable or local
-                if (location.sustainable || location.local) {
-                    const pulse = document.createElement("div");
-                    pulse.className = "pulse";
-                    pin.appendChild(pulse);
-                }
-                
                 // Add click event to pin
                 pin.addEventListener("click", () => {
                     showLocationInfo(location);
@@ -1144,44 +1135,98 @@
             });
         }
         
-        // Add filter button
-        function addSustainableFilterButton() {
-            const container = document.querySelector(".category-controls");
-            
-            const filterButton = document.createElement("button");
-            filterButton.id = "sustainable-btn";
-            filterButton.className = "category-btn";
-            filterButton.style.backgroundColor = "#10b981";
-            filterButton.style.backgroundImage = "none";
-            filterButton.style.display = "flex";
-            filterButton.style.alignItems = "center";
-            filterButton.style.justifyContent = "center";
-            filterButton.innerHTML = "♻️";
-            
-            const label = document.createElement("span");
-            label.className = "btn-label";
-            label.textContent = "Eco-Friendly";
-            filterButton.appendChild(label);
-            
-            filterButton.addEventListener("click", () => {
-                if (activeCategory) {
-                    showSustainableAndLocalOnly();
-                    document.querySelectorAll(".category-btn").forEach(btn => {
-                        btn.classList.remove("active");
-                    });
-                    filterButton.classList.add("active");
-                } else {
-                    alert("Please select a category first");
-                }
-            });
-            
-            container.appendChild(filterButton);
+    function addFilterDropdown() {
+    const container = document.querySelector(".category-controls");
+
+    const filterWrapper = document.createElement("div");
+    filterWrapper.style.display = "flex";
+    filterWrapper.style.alignItems = "center";
+    filterWrapper.style.gap = "10px";
+
+    const label = document.createElement("label");
+    label.textContent = "Filter by:";
+    label.style.fontWeight = "500";
+    label.style.color = "var(--emirates-dark)";
+
+    const select = document.createElement("select");
+    select.id = "filter-select";
+    select.style.padding = "8px 12px";
+    select.style.borderRadius = "25px";
+    select.style.border = "1px solid #ccc";
+    select.style.fontSize = "14px";
+
+    const options = ["None", "Sustainable", "Local"];
+    options.forEach(opt => {
+        const option = document.createElement("option");
+        option.value = opt.toLowerCase();
+        option.textContent = opt;
+        select.appendChild(option);
+    });
+
+    select.addEventListener("change", () => {
+        const value = select.value;
+        if (!activeCategory) {
+            alert("Please select a category first");
+            select.value = "none";
+            return;
         }
+
+        clearPins();
+
+        const filtered = locations[activeCategory].filter(loc => {
+            if (value === "sustainable") return loc.sustainable;
+            if (value === "local") return loc.local;
+            return true;
+        });
+
+        const title = document.getElementById("category-title");
+        title.innerHTML = value === "none" 
+            ? `Dubai's <span>${activeCategory.charAt(0).toUpperCase() + activeCategory.slice(1)}</span>`
+            : `<span>${value.charAt(0).toUpperCase() + value.slice(1)} ${activeCategory}</span> in Dubai`;
+
+        filtered.forEach((location, index) => {
+            const pin = document.createElement("div");
+            pin.className = `location-pin ${activeCategory}`;
+            pin.style.top = location.position.top;
+            pin.style.left = location.position.left;
+            pin.setAttribute("data-id", location.id);
+            pin.style.animationDelay = `${index * 0.1}s`;
+
+            if (location.sustainable || location.local) {
+                const pulse = document.createElement("div");
+                pulse.className = "pulse";
+                pin.appendChild(pulse);
+            }
+
+            pin.addEventListener("click", () => showLocationInfo(location));
+
+            const highlight = document.createElement("div");
+            highlight.className = `map-highlight ${activeCategory}`;
+            highlight.style.top = location.position.top;
+            highlight.style.left = location.position.left;
+            highlight.style.width = "80px";
+            highlight.style.height = "80px";
+            highlight.style.marginTop = "-40px";
+            highlight.style.marginLeft = "-40px";
+
+            const mapContainer = document.querySelector(".map-container");
+            mapContainer.appendChild(pin);
+            mapContainer.appendChild(highlight);
+
+            setTimeout(() => highlight.classList.add("visible"), index * 100 + 300);
+        });
+    });
+
+    filterWrapper.appendChild(label);
+    filterWrapper.appendChild(select);
+    container.appendChild(filterWrapper);
+}
+
         
         // Initialize the application
         document.addEventListener("DOMContentLoaded", () => {
             initializeMap();
-            addSustainableFilterButton();
+            addFilterDropdown()
             
             // Add event listener for map clicks to close info box when clicking outside
             document.addEventListener("click", (event) => {
