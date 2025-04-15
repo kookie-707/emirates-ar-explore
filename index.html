@@ -652,12 +652,8 @@
     <div class="container">
         <div class="header">
             <img src="emirates logo.png" alt="Emirates Logo" class="logo">
-            <h1>Emirates AR <span class="shimmer">Explorer</span></h1>
+            <h1>Emirates AR <span class="shimmer">Explore</span></h1>
             <p>Your premium guide to exploring Dubai</p>
-            <div class="weather-indicator">
-                <div class="weather-icon"></div>
-                <span>32°C Sunny</span>
-            </div>
         </div>
         
         <div class="instructions">
@@ -714,214 +710,167 @@
         // Data for attractions, shops, restaurants and hotels with map coordinates
         // These coordinates are calibrated based on the Dubai map image
         const locations = {
-            sights: [
-                {
-                    id: 1,
-                    name: "Burj Khalifa",
-                    position: { top: "43%", left: "37%" },
-                    description: "The world's tallest building at 828m. Experience breathtaking views from the observation decks and admire this architectural marvel that dominates Dubai's skyline.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.burjkhalifa.ae",
-                    booking: "https://tickets.burjkhalifa.ae"
-                },
-                {
-                    id: 2,
-                    name: "Dubai Fountain",
-                    position: { top: "52%", left: "33%" },
-                    description: "The world's largest choreographed fountain system with spectacular performances set to music. Located at the base of the iconic Burj Khalifa and overlooking the Dubai Mall.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.burjkhalifa.ae/en/the-dubai-fountain/",
-                    booking: "https://www.getyourguide.com/dubai-fountain-l3421/"
-                },
-                {
-                    id: 3,
-                    name: "Palm Jumeirah",
-                    position: { top: "68%", left: "71%" },
-                    description: "An artificial archipelago in the shape of a palm tree. This engineering marvel features luxury hotels, apartments, and entertainment options with stunning Gulf views.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.visitdubai.com/en/places-to-visit/palm-jumeirah",
-                    booking: "https://www.getyourguide.com/palm-jumeirah-l2704/"
-                },
-                {
-                    id: 4,
-                    name: "Dubai Mall",
-                    position: { top: "47%", left: "29%" },
-                    description: "One of the world's largest shopping malls featuring over 1,200 stores, an indoor waterfall, an ice rink, and the famous Dubai Aquarium & Underwater Zoo.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://thedubaimall.com",
-                    booking: "https://thedubaimall.com/en/shop/directory"
-                },
-                {
-                    id: 5,
-                    name: "Burj Al Arab",
-                    position: { top: "77%", left: "40%" },
-                    description: "The iconic sail-shaped hotel standing on its own artificial island. Often described as the world's only 7-star hotel, it's a symbol of modern Dubai's luxury and ambition.",
-                    sustainable: true,
-                    local: false,
-                    website: "https://www.jumeirah.com/en/stay/dubai/burj-al-arab-jumeirah",
-                    booking: "https://www.jumeirah.com/en/booking/search"
-                }
-            ],
-            shops: [
-                {
-                    id: 6,
-                    name: "Dubai Mall Fashion Avenue",
-                    position: { top: "45%", left: "27%" },
-                    description: "The premier fashion destination in Dubai featuring over 150 luxury brands including Chanel, Louis Vuitton, and Cartier in an elegantly designed shopping district.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://thedubaimall.com/en/shop/fashion-avenue",
-                    booking: "https://thedubaimall.com/en/shop/directory"
-                },
-                {
-                    id: 7,
-                    name: "Souk Madinat Jumeirah",
-                    position: { top: "72%", left: "45%" },
-                    description: "A traditional Arabian marketplace within the Madinat Jumeirah resort offering handcrafted souvenirs, textiles, and jewelry in a stunning waterfront setting.",
-                    sustainable: false,
-                    local: true,
-                    website: "https://www.jumeirah.com/en/dine/dubai/madinat-jumeirah/souk-madinat-jumeirah",
-                    booking: "https://www.jumeirah.com/en/dine/dubai/madinat-jumeirah/souk-madinat-jumeirah/reserve"
-                },
-                {
-                    id: 8,
-                    name: "Mall of the Emirates",
-                    position: { top: "67%", left: "22%" },
-                    description: "A premier shopping destination featuring Ski Dubai, the first indoor ski resort in the Middle East, alongside designer boutiques and department stores.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.malloftheemirates.com",
-                    booking: "https://www.malloftheemirates.com/shopping"
-                },
-                {
-                    id: 9,
-                    name: "The Dubai Design District",
-                    position: { top: "32%", left: "52%" },
-                    description: "A creative hub showcasing local designers alongside international brands. Features concept stores, fashion boutiques, art galleries, and sustainable design studios.",
-                    sustainable: true,
-                    local: true,
-                    website: "https://dubaidesigndistrict.com",
-                    booking: "https://dubaidesigndistrict.com/shop/"
-                },
-                {
-                    id: 10,
-                    name: "Palm Jumeirah Boardwalk",
-                    position: { top: "62%", left: "65%" },
-                    description: "A 11km boardwalk around Palm Jumeirah featuring a variety of retail kiosks, souvenir shops, and pop-up stores with spectacular views of the Dubai Marina skyline.",
-                    sustainable: true,
-                    local: true,
-                    website: "https://www.visitdubai.com/en/places-to-visit/the-boardwalk",
-                    booking: "https://www.getyourguide.com/the-palm-jumeirah-boardwalk-l89099/"
-                }
-            ],
-            food: [
-                {
-                    id: 11,
-                    name: "At.mosphere Burj Khalifa",
-                    position: { top: "44%", left: "34%" },
-                    description: "The world's highest restaurant located on the 122nd floor of Burj Khalifa offering fine dining with breathtaking views of the city skyline and Arabian Gulf.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.atmosphereburjkhalifa.com",
-                    booking: "https://www.atmosphereburjkhalifa.com/reservations"
-                },
-                {
-                    id: 12,
-                    name: "Pierchic",
-                    position: { top: "76%", left: "38%" },
-                    description: "An award-winning seafood restaurant built on stilts at the end of a pier with panoramic views of the Arabian Gulf and Burj Al Arab. Known for sustainable seafood.",
-                    sustainable: true,
-                    local: false,
-                    website: "https://www.pierchic.com",
-                    booking: "https://www.pierchic.com/book"
-                },
-                {
-                    id: 13,
-                    name: "Nobu Dubai",
-                    position: { top: "70%", left: "68%" },
-                    description: "Located at Atlantis, The Palm, this world-famous Japanese restaurant by chef Nobu Matsuhisa offers innovative fusion cuisine in a stunning setting.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.atlantis.com/dubai/dining/nobu",
-                    booking: "https://www.atlantis.com/dubai/dining/nobu/reservation"
-                },
-                {
-                    id: 14,
-                    name: "Al Dawaar Revolving Restaurant",
-                    position: { top: "28%", left: "38%" },
-                    description: "Dubai's only revolving restaurant offering panoramic 360° views of the city skyline, Arabian Gulf, and Creek. Features international cuisine with an emphasis on Middle Eastern specialties.",
-                    sustainable: false,
-                    local: true,
-                    website: "https://www.hyatt.com/en-US/hotel/united-arab-emirates/hyatt-regency-dubai/dxbrd/dining",
-                    booking: "https://www.hyatt.com/en-US/hotel/united-arab-emirates/hyatt-regency-dubai/dxbrd/dining/al-dawaar"
-                },
-                {
-                    id: 15,
-                    name: "Arabian Tea House",
-                    position: { top: "15%", left: "29%" },
-                    description: "Located in the historic Al Fahidi district, this charming café serves traditional Emirati cuisine and Arabic tea in an authentic heritage setting with a beautiful courtyard.",
-                    sustainable: true,
-                    local: true,
-                    website: "https://arabianteahouse.com",
-                    booking: "https://arabianteahouse.com/reservations"
-                }
-            ],
-            hotels: [
-                {
-                    id: 16,
-                    name: "Burj Al Arab Jumeirah",
-                    position: { top: "76%", left: "42%" },
-                    description: "The iconic sail-shaped 7-star hotel offers unparalleled luxury with butler service, exquisite suites, and breathtaking views. Features nine world-class restaurants and a private beach.",
-                    sustainable: true,
-                    local: false,
-                    website: "https://www.jumeirah.com/en/stay/dubai/burj-al-arab-jumeirah",
-                    booking: "https://www.jumeirah.com/en/booking/search"
-                },
-                {
-                    id: 17,
-                    name: "Atlantis, The Palm",
-                    position: { top: "69%", left: "72%" },
-                    description: "A majestic ocean-themed resort located at the apex of Palm Jumeirah, featuring the Aquaventure Waterpark, The Lost Chambers Aquarium, and luxurious accommodations.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.atlantis.com/dubai",
-                    booking: "https://www.atlantis.com/dubai/booking"
-                },
-                {
-                    id: 18,
-                    name: "Al Seef Heritage Hotel",
-                    position: { top: "18%", left: "34%" },
-                    description: "Located in the historic Al Seef district, this hotel offers authentic Arabian hospitality in traditional-style rooms. Experience old Dubai with modern comforts and waterfront views.",
-                    sustainable: true,
-                    local: true,
-                    website: "https://www.hilton.com/en/hotels/dxbseci-al-seef-heritage-hotel-dubai",
-                    booking: "https://www.hilton.com/en/book/reservation/rooms/"
-                },
-                {
-                    id: 19,
-                    name: "Address Downtown",
-                    position: { top: "49%", left: "41%" },
-                    description: "A luxury hotel in Downtown Dubai with direct access to Dubai Mall and stunning views of Burj Khalifa. Features elegant rooms, fine dining, and a world-class spa.",
-                    sustainable: false,
-                    local: false,
-                    website: "https://www.addresshotels.com/en/hotels/address-downtown",
-                    booking: "https://www.addresshotels.com/en/book-now"
-                },
-                {
-                    id: 20,
-                    name: "Emirates One&Only The Palm",
-                    position: { top: "65%", left: "59%" },
-                    description: "An intimate beach resort on Palm Jumeirah featuring Moorish and Andalusian architecture. Offers private beach access, sustainable practices, and farm-to-table dining experiences.",
-                    sustainable: true,
-                    local: true,
-                    website: "https://www.oneandonlyresorts.com/the-palm",
-                    booking: "https://www.oneandonlyresorts.com/the-palm/offers"
-                }
-            ]
+    sights: [
+        {
+            id: 1,
+            name: "Burj Khalifa",
+            position: { top: "43%", left: "34%" },
+            description: "The world's tallest building at 828m. Experience breathtaking views from the observation decks and admire this architectural marvel that dominates Dubai's skyline.",
+            sustainable: false,
+            local: false,
+            website: "https://www.burjkhalifa.ae",
+            booking: "https://ticket.atthetop.ae/"
+        },
+        {
+            id: 2,
+            name: "Dubai Fountain",
+            position: { top: "62%", left: "29%" },
+            description: "The world's largest choreographed fountain system with spectacular performances set to music. Located at the base of the iconic Burj Khalifa and overlooking the Dubai Mall.",
+            sustainable: false,
+            local: false,
+            website: "https://www.burjkhalifa.ae/experiences/experiences-nearby/#dubai-fountain",
+            booking: "https://ticket.atthetop.ae/experiences/dubai-fountain-broadwalk/"
+        },
+        {
+            id: 3,
+            name: "Burj Park",
+            position: { top: "58%", left: "70%" },
+            description: "A tranquil green space on an island next to Burj Khalifa, Burj Park offers scenic views, art installations, and open lawns. It's a sustainable urban park ideal for relaxing walks and events.",
+            sustainable: true,
+            local: false,
+            website: "https://www.burjparkbyemaar.com/",
+        },
+        {
+            id: 4,
+            name: "Dubai Mall",
+            position: { top: "37%", left: "10%" },
+            description: "One of the world's largest shopping malls featuring over 1,200 stores, an indoor waterfall, an ice rink, and the famous Dubai Aquarium & Underwater Zoo.",
+            sustainable: false,
+            local: false,
+            website: "https://thedubaimall.com",
+        }
+    ],
+    shops: [
+    {
+        id: 5,
+        name: "Souk Al Bahar",
+        position: { top: "39%", left: "54%" },
+        description: "A modern Arabian-style market featuring boutiques, dining, and lounges with stunning views of the Dubai Fountain and Burj Khalifa. Blends tradition with luxury in the heart of Downtown Dubai.",
+        sustainable: false,
+        local: true,
+        website: "https://www.soukalbahar.ae"
+    },
+    {
+        id: 6,
+        name: "Van Cleef & Arpels",
+        position: { top: "46%", left: "8%" },
+        description: "A renowned French luxury jewelry and watch brand, Van Cleef & Arpels offers timeless elegance and intricate craftsmanship in its Dubai Mall boutique.",
+        sustainable: false,
+        local: false,
+        website:"https://www.vancleefarpels.com/ae/en/boutique-detailed-page/dubai-dubai-mall.html"
+    },
+    {
+        id: 7,
+        name: "Bateel Boutique",
+        position: { top: "25%", left: "9%" },
+        description: "Bateel is a luxury gourmet brand from the region, known for premium organic dates, fine chocolates, and artisanal gift boxes — a fusion of tradition and taste.",
+        sustainable: true,
+        local: true,
+        website: "https://bateel.com/en"
+    },
+    {
+        id: 8,
+        name: "Emirates Official Store",
+        position: { top: "24%", left: "20%" },
+        description: "The official retail outlet for Emirates airline merchandise, featuring travel essentials, aviation-themed gifts, and exclusive branded items.",
+        sustainable: false,
+        local: true,
+        website: "https://emirates.store/"
+    },
+    {
+        id: 9,
+        name: "Al Nassma Chocolate",
+        position: { top: "45%", left: "11%" },
+        description: "The world’s first and finest camel milk chocolate brand, Al Nassma offers a uniquely Arabian twist on luxury chocolate, handcrafted in Dubai.",
+        sustainable: true,
+        local: true,
+        website: "https://barandcocoa.com/collections/al-nassma?srsltid=AfmBOophzIcij96s3NE55aEPIv0TSXi9X9kdC7wbwPCw5XceMJ4p95ND"
+    }
+],
+
+food: [
+    {
+        id: 9,
+        name: "At.mosphere Burj Khalifa",
+        position: { top: "44%", left: "34%" },
+        description: "The world's highest restaurant located on the 122nd floor of Burj Khalifa offering fine dining with breathtaking views of the city skyline and Arabian Gulf.",
+        sustainable: false,
+        local: false,
+        website: "https://www.atmosphereburjkhalifa.com",
+        booking: "https://www.atmosphereburjkhalifa.com/table-reservation/#tableReservationForm"
+    },
+    {
+        id: 10,
+        name: "Tiramisu Café",
+        position: { top: "48%", left: "22%" },
+        description: "A charming café in Souk Al Bahar offering artisan tiramisu and Italian-inspired desserts with cozy views of the Burj Lake and Dubai Fountain.",
+        sustainable: false,
+        local: true,
+        website: "https://www.instagram.com/tiramisucafeuae/?hl=en"
+    },
+    {
+        id: 11,
+        name: "Public",
+        position: { top: "19%", left: "22%" },
+        description: "Located in Souk Al Bahar, Public brings French-Mediterranean flavors to Downtown Dubai with elegant outdoor dining and fountain views.",
+        sustainable: false,
+        local: false,
+        website: "https://www.instagram.com/public/?hl=en"
+    },
+    {
+        id: 12,
+        name: "URLA Dubai",
+        position: { top: "19%", left: "49%"},
+        description: "A contemporary Aegean restaurant near the Burj Khalifa serving coastal flavors from Spain, Greece, and Turkey in a luxurious open-air setting.",
+        sustainable: true,
+        local: false,
+        website: "https://www.urlarestaurant.com/",
+    },
+    {
+        id: 13,
+        name: "Maison De Curry",
+        position: { top: "28%", left: "44%" },
+        description: "An elevated dining experience overlooking the Dubai Fountain, Maison De Curry serves global dishes with aromatic spices and a stylish atmosphere.",
+        sustainable: false,
+        local: false,
+        website: "https://maisondecurry.com/",
+        booking: "https://maisondecurry.com/reservation/"
+    }
+],
+
+hotels: [
+    {
+        id: 14,
+        name: "Armani Hotel Dubai",
+        position: { top: "44%", left: "35%" },
+        description: "Located inside the Burj Khalifa, Armani Hotel Dubai blends elegant design and world-class service with direct access to Dubai Mall and the city's vibrant downtown district.",
+        sustainable: false,
+        local: false,
+        website: "https://www.armanihoteldubai.com/",
+        booking: "https://www.armanihoteldubai.com/en/book-your-stay/"
+    },
+    {
+        id: 15,
+        name: "Address Downtown",
+        position: { top: "20%", left: "26%" },
+        description: "A luxury hotel in Downtown Dubai with direct access to Dubai Mall and stunning views of Burj Khalifa. Features elegant rooms, fine dining, and a world-class spa.",
+        sustainable: false,
+        local: false,
+        website: "https://www.addresshotels.com/en/hotels/address-downtown",
+        booking: "https://www.addresshotels.com/en/book-now"
+    }
+]
+
         };
         
         // Currently active category
@@ -1030,43 +979,52 @@
         }
         
         // Show location information
-        function showLocationInfo(location) {
-            const infoBox = document.getElementById("info-box");
-            const locationName = document.getElementById("location-name");
-            const locationDescription = document.getElementById("location-description");
-            const locationBadges = document.getElementById("location-badges");
-            const websiteLink = document.getElementById("website-link");
-            const bookingLink = document.getElementById("booking-link");
-            
-            // Set location info
-            locationName.textContent = location.name;
-            locationDescription.textContent = location.description;
-            
-            // Clear existing badges
-            locationBadges.innerHTML = "";
-            
-            // Add badges
-            if (location.sustainable) {
-                const sustainableBadge = document.createElement("span");
-                sustainableBadge.className = "sustainable-badge";
-                sustainableBadge.textContent = "Eco-Friendly";
-                locationBadges.appendChild(sustainableBadge);
-            }
-            
-            if (location.local) {
-                const localBadge = document.createElement("span");
-                localBadge.className = "local-badge";
-                localBadge.textContent = "Local Experience";
-                locationBadges.appendChild(localBadge);
-            }
-            
-            // Set links
-            websiteLink.href = location.website;
-            bookingLink.href = location.booking;
-            
-            // Show info box
-            infoBox.style.display = "block";
-        }
+       // Show location information
+function showLocationInfo(location) {
+    const infoBox = document.getElementById("info-box");
+    const locationName = document.getElementById("location-name");
+    const locationDescription = document.getElementById("location-description");
+    const locationBadges = document.getElementById("location-badges");
+    const websiteLink = document.getElementById("website-link");
+    const bookingLink = document.getElementById("booking-link");
+    
+    // Set location info
+    locationName.textContent = location.name;
+    locationDescription.textContent = location.description;
+    
+    // Clear existing badges
+    locationBadges.innerHTML = "";
+    
+    // Add badges
+    if (location.sustainable) {
+        const sustainableBadge = document.createElement("span");
+        sustainableBadge.className = "sustainable-badge";
+        sustainableBadge.textContent = "Eco-Friendly";
+        locationBadges.appendChild(sustainableBadge);
+    }
+    
+    if (location.local) {
+        const localBadge = document.createElement("span");
+        localBadge.className = "local-badge";
+        localBadge.textContent = "Local Experience";
+        locationBadges.appendChild(localBadge);
+    }
+    
+    // Set website link
+    websiteLink.href = location.website || "#";
+    
+    // Handle booking link
+    if (location.booking) {
+        bookingLink.href = location.booking;
+        bookingLink.style.display = "inline-flex"; // Show booking button
+    } else {
+        bookingLink.style.display = "none"; // Hide booking button when no link available
+        websiteLink.style.flexBasis = "100%"; // Make website button take full width
+    }
+    
+    // Show info box
+    infoBox.style.display = "block";
+}
         
         // Close location info box
         function closeInfoBox() {
